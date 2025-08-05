@@ -1,224 +1,161 @@
-# 🏛️ Quiz Lei Orgânica de Canoas
+# 🏛️ Quiz Lei Orgânica de Canoas - Preparação para Concurso Público
 
-## 🎯 **Foco Principal: Preparação para Concurso Público**
+[![GitHub stars](https://img.shields.io/github/stars/LimaLb01/concurso_publico?style=social)](https://github.com/LimaLb01/concurso_publico)
+[![GitHub forks](https://img.shields.io/github/forks/LimaLb01/concurso_publico?style=social)](https://github.com/LimaLb01/concurso_publico)
+[![GitHub issues](https://img.shields.io/github/issues/LimaLb01/concurso_publico)](https://github.com/LimaLb01/concurso_publico/issues)
+[![GitHub license](https://img.shields.io/github/license/LimaLb01/concurso_publico)](https://github.com/LimaLb01/concurso_publico/blob/main/LICENSE)
 
-Um site interativo de perguntas e respostas sobre a Lei Orgânica Municipal de Canoas, **especificamente desenvolvido para preparar candidatos para concursos públicos**. O objetivo é **simular condições reais de prova** e **desenvolver competências necessárias** para o sucesso no concurso.
+## 🎯 **Sobre o Projeto**
 
-## 📋 Características
+Um **quiz interativo** desenvolvido especificamente para **preparar candidatos para concursos públicos** que incluem a Lei Orgânica de Canoas em seu edital. O projeto oferece **75 questões únicas** distribuídas em **5 conjuntos diferentes**, com foco em simular condições reais de prova e desenvolver competências necessárias para o sucesso no concurso.
 
-- **Dois usuários independentes**: Lucas e Tony, cada um com seu próprio placar
-- **Três níveis de dificuldade**: Fácil, Médio e Difícil
-- **15 perguntas** baseadas na Lei Orgânica de Canoas
-- **Feedback detalhado** para respostas erradas
-- **Placar completo** com estatísticas
+## ✨ **Características Principais**
+
+### 🎮 **Interface Interativa**
 - **Design responsivo** e moderno
-- **Persistência de dados** usando localStorage
-- **Sistema de pontuação** (2 pontos por acerto, máximo 30 pontos)
-- **Timer opcional** para simular tempo de prova
-- **Modo de revisão** para revisar perguntas respondidas
+- **Interface intuitiva** para estudo
+- **Feedback visual** imediato
+- **Navegação fluida** entre questões
+
+### 📊 **Sistema de Pontuação**
+- **2 pontos por acerto** (máximo 30 pontos)
+- **Indicadores visuais** em cada pergunta
 - **Estatísticas detalhadas** por nível de dificuldade
-- **Exportação de resultados** em arquivo de texto
-- **Reset total** com troca de conjunto de perguntas
+- **Relatórios de exportação** completos
 
-## 🎯 Funcionalidades
+### 🎯 **5 Conjuntos de Questões**
+- **75 questões únicas** para treinamento intensivo
+- **Distribuição equilibrada**: 5 fáceis + 5 médias + 5 difíceis por conjunto
+- **Focos específicos** por conjunto:
+  - **Conjunto A**: Fundamentos constitucionais
+  - **Conjunto B**: Competências municipais
+  - **Conjunto C**: Poder Legislativo
+  - **Conjunto D**: Poder Executivo
+  - **Conjunto E**: Procedimentos complexos
 
-### Seleção de Usuário
-- Escolha entre Lucas e Tony
-- Cada usuário tem progresso independente
-- Possibilidade de trocar de usuário a qualquer momento
+### 🤖 **Assistente IA Integrado**
+- **Chat interativo** para dúvidas
+- **Explicações detalhadas** sobre artigos
+- **Ações rápidas** para consultas específicas
+- **Fallback local** quando API não disponível
 
-### Sistema de Perguntas
-- **5 perguntas fáceis**: Conceitos básicos da Lei Orgânica
-- **5 perguntas médias**: Aplicação prática dos conhecimentos
-- **5 perguntas difíceis**: Detalhes específicos e casos complexos
+## 🚀 **Como Usar**
 
-### Feedback e Explicações
-- ✅ Indicação visual de resposta correta
-- ❌ Indicação visual de resposta incorreta
-- 📝 Explicação detalhada baseada nos artigos da Lei Orgânica
-- 🔍 Referência aos artigos específicos da legislação
+### **Instalação Local**
+```bash
+# Clone o repositório
+git clone https://github.com/LimaLb01/concurso_publico.git
 
-### Placar Completo
-- Total de perguntas disponíveis
-- Número de perguntas respondidas
-- Acertos e erros
-- Taxa de acerto em porcentagem
-- **Sistema de pontuação** (2 pontos por acerto, máximo 30 pontos)
-- Estatísticas por nível de dificuldade
-- Tempo total de estudo (com timer)
+# Entre no diretório
+cd concurso_publico
 
-### Funcionalidades Avançadas
-- **Timer**: Cronômetro opcional para simular tempo de prova
-- **Modo Revisão**: Revise apenas as perguntas já respondidas
-- **Estatísticas Detalhadas**: Visualize performance por nível de dificuldade
-- **Exportar Resultados**: Salve um relatório completo em arquivo de texto
-- **Reset Total**: Zere progresso de ambos os usuários e troque para novo conjunto de perguntas
+# Abra o arquivo index.html no navegador
+# Ou use um servidor local:
+python3 -m http.server 8000
+# Acesse: http://localhost:8000
+```
 
-## 🎯 **Estratégia de Preparação para Concurso**
+### **Uso Online**
+1. Acesse o site
+2. Selecione um usuário (Lucas ou Tony)
+3. Responda as questões
+4. Use as funcionalidades avançadas:
+   - ⏰ **Timer** para simular prova
+   - 🔍 **Modo Revisão** para questões erradas
+   - 📊 **Estatísticas** detalhadas
+   - 📤 **Exportar** relatórios
+   - 🔄 **Reset Total** para novo conjunto
 
-### **📚 Fases de Estudo Recomendadas:**
+## 📚 **Estratégia de Estudo**
 
-#### **Fase 1: Diagnóstico (Sem Timer)**
-1. **Faça o quiz completo** sem pressão de tempo
-2. **Analise estatísticas** por nível de dificuldade
-3. **Identifique pontos fracos** para estudo focado
-4. **Estabeleça meta** baseada no tipo de concurso
+### **Fases Recomendadas**
+1. **Diagnóstico** (Conjunto A): Avaliar conhecimento atual
+2. **Estudo Focado** (Conjunto B): Melhorar pontos fracos
+3. **Simulação** (Conjunto C): Simular condições de prova
+4. **Aprimoramento** (Conjunto D): Buscar excelência
+5. **Consolidação** (Conjunto E): Domínio completo
 
-#### **Fase 2: Estudo Dirigido**
-1. **Use modo revisão** para questões erradas
-2. **Consulte a Lei Orgânica** para cada erro
-3. **Pratique questões difíceis** repetidamente
-4. **Anote pontos importantes** de cada questão
-
-#### **Fase 3: Simulação de Prova**
-1. **Ative o timer** para simular tempo real
-2. **Responda todas as questões** em sequência
-3. **Mantenha ritmo** de 2 min por questão
-4. **Analise performance** sob pressão
-
-#### **Fase 4: Aprimoramento**
-1. **Use reset total** para novo conjunto de questões
-2. **Compare performance** entre conjuntos
-3. **Busque 30 pontos** (100% de acerto)
-4. **Foque em áreas** com menor pontuação
-
-### **🎯 Metas por Tipo de Concurso:**
-
+### **Metas por Tipo de Concurso**
 - **Municipal (Básico)**: 18-24 pontos (60-80%)
 - **Estadual (Intermediário)**: 24-27 pontos (80-90%)
 - **Federal (Avançado)**: 27-30 pontos (90-100%)
 
-## 🚀 Como Usar
+## 🛠️ **Tecnologias Utilizadas**
 
-1. **Abra o arquivo `index.html`** em seu navegador
-2. **Selecione um usuário**: Lucas ou Tony
-3. **Responda as perguntas** clicando nas opções
-4. **Veja o feedback** imediatamente após responder
-5. **Navegue entre as perguntas** usando os botões Anterior/Próxima
-6. **Acompanhe seu progresso** no placar
-7. **Use as funcionalidades avançadas**:
-   - ⏰ **Timer**: Ative para cronometrar seu tempo de estudo
-   - 🔍 **Modo Revisão**: Revise apenas perguntas respondidas
-   - 📊 **Estatísticas**: Veja performance por dificuldade
-   - 📤 **Exportar**: Salve relatório completo
-   - 🔄 **Reset Total**: Zere progresso de ambos e troque perguntas
-8. **Troque de usuário** quando desejar
+- **HTML5** - Estrutura semântica
+- **CSS3** - Estilização moderna e responsiva
+- **JavaScript (ES6+)** - Lógica interativa
+- **LocalStorage** - Persistência de dados
+- **Hugging Face API** - Assistente IA
+- **GitHub Pages** - Hospedagem
 
-## 📚 Base das Perguntas - NÍVEL CONCURSO PÚBLICO
-
-Todas as perguntas foram elaboradas especificamente para concursos públicos, com foco em:
-
-### **Nível Fácil (Conhecimentos Básicos)**
-- **Fundamentos constitucionais** da organização municipal
-- **Estrutura dos Poderes** Executivo e Legislativo
-- **Requisitos para candidatura** e posse
-- **Base legal** das competências municipais
-- **Interpretação de dispositivos** constitucionais
-
-### **Nível Médio (Aplicação Prática)**
-- **Diferenças entre competências** exclusivas e privativas
-- **Procedimentos processuais** de perda de mandato
-- **Efeitos do silêncio** administrativo
-- **Processos eleitorais** internos
-- **Base de cálculo** orçamentária
-
-### **Nível Difícil (Análise Complexa)**
-- **Interpretação de dispositivos** legais complexos
-- **Fundamentação constitucional** de quóruns especiais
-- **Procedimentos de derrubada** de veto
-- **Competências durante recesso** parlamentar
-- **Exceções e limitações** orçamentárias
-
-### **Características das Perguntas:**
-- **Fundamentação legal** específica (artigos da Lei Orgânica e CF/88)
-- **Interpretação jurídica** avançada
-- **Casos práticos** de aplicação
-- **Distinções conceituais** importantes
-- **Exceções e limitações** legais
-
-## 🎨 Design
-
-- Interface moderna e intuitiva
-- Cores diferenciadas por nível de dificuldade
-- Animações suaves e feedback visual
-- Layout responsivo para diferentes dispositivos
-- Gradientes e sombras para melhor experiência visual
-
-## 💾 Persistência de Dados
-
-O sistema salva automaticamente:
-- Respostas de cada usuário
-- Estatísticas de acertos e erros
-- Progresso individual
-
-Os dados são mantidos mesmo após fechar o navegador.
-
-## 📱 Compatibilidade
-
-- ✅ Chrome
-- ✅ Firefox
-- ✅ Safari
-- ✅ Edge
-- ✅ Dispositivos móveis
-
-## 🔧 Tecnologias Utilizadas
-
-- **HTML5**: Estrutura da página
-- **CSS3**: Estilização e responsividade
-- **JavaScript**: Lógica do quiz e interatividade
-- **localStorage**: Persistência de dados
-- **Llama 2**: IA gratuita via Hugging Face API
-- **Hugging Face Inference API**: Serviço gratuito de IA
-
-## 🤖 Configuração da IA
-
-Para usar a IA funcional, siga estes passos:
-
-### 1. Obter Chave Gratuita do Hugging Face
-1. Acesse: https://huggingface.co/
-2. Crie uma conta gratuita
-3. Vá em **Settings** > **Access Tokens**
-4. Clique em **New token**
-5. Dê um nome ao token (ex: "quiz-canoas")
-6. Selecione **Read** como permissão
-7. Clique em **Generate token**
-8. Copie a chave gerada (começa com "hf_")
-
-### 2. Configurar a Chave
-1. Abra o arquivo `config.js`
-2. Substitua `'hf_xxx'` pela sua chave real
-3. Salve o arquivo
-
-### 3. Modelos Disponíveis
-- **Principal**: Llama 2 (meta-llama/Llama-2-7b-chat-hf)
-- **Fallback**: DialoGPT (microsoft/DialoGPT-medium)
-
-### 4. Limites Gratuitos
-- **Hugging Face**: 30.000 requests/mês gratuitos
-- **Velocidade**: Pode haver fila de espera em horários de pico
-- **Tamanho**: Respostas limitadas a 300 tokens
-
-## ⚠️ Importante
-- A chave é gratuita e segura
-- Não há custos associados
-- Funciona offline se a API falhar (fallback local)
-
-## 📖 Estrutura dos Arquivos
+## 📁 **Estrutura do Projeto**
 
 ```
-quiz-lei-organica-canoas/
-├── index.html          # Página principal
-├── styles.css          # Estilos CSS
-├── script.js           # Lógica JavaScript
-├── config.js           # Configuração da IA
-├── README.md           # Este arquivo
-└── Lei-Organica-Canoas.txt  # Base das perguntas
+concurso_publico/
+├── index.html              # Página principal
+├── script.js               # Lógica do quiz
+├── styles.css              # Estilos CSS
+├── config.js               # Configuração da IA
+├── Lei-Organica-Canoas.txt # Base de dados
+├── README.md               # Documentação principal
+├── PREPARACAO_CONCURSO.md  # Guia de preparação
+├── SISTEMA_PONTUACAO.md    # Sistema de pontuação
+├── CONJUNTOS_QUESTOES.md   # Guia dos conjuntos
+└── .gitignore              # Arquivos ignorados
 ```
 
-## 🎯 Objetivo
+## 🎯 **Funcionalidades Avançadas**
 
-Este quiz foi desenvolvido para auxiliar candidatos a concursos públicos que precisam estudar a Lei Orgânica Municipal de Canoas, oferecendo uma forma interativa e eficaz de testar e consolidar conhecimentos sobre a legislação municipal.
+### **Timer para Simulação**
+- Cronômetro configurável
+- Simulação de tempo de prova
+- Análise de performance sob pressão
+
+### **Modo Revisão**
+- Filtro para questões respondidas
+- Foco em erros para estudo
+- Análise detalhada de respostas
+
+### **Estatísticas Detalhadas**
+- Performance por nível de dificuldade
+- Evolução ao longo do tempo
+- Comparação entre conjuntos
+
+### **Exportação de Relatórios**
+- Relatórios em formato texto
+- Estatísticas completas
+- Sugestões de estudo
+
+## 🤝 **Como Contribuir**
+
+1. **Fork** o projeto
+2. Crie uma **branch** para sua feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um **Pull Request**
+
+## 📝 **Licença**
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👨‍💻 **Autor**
+
+**LimaLb01**
+- GitHub: [@LimaLb01](https://github.com/LimaLb01)
+
+## 🙏 **Agradecimentos**
+
+- **Lei Orgânica de Canoas** - Base legal das questões
+- **Hugging Face** - API de IA para assistente
+- **Comunidade de concursos** - Feedback e sugestões
+
+## 📞 **Contato**
+
+- **Email**: seu-email@exemplo.com
+- **GitHub**: [@LimaLb01](https://github.com/LimaLb01)
+- **Projeto**: [Quiz Lei Orgânica de Canoas](https://github.com/LimaLb01/concurso_publico)
 
 ---
 
-**Desenvolvido para estudos de concurso público** 📚✨ 
+⭐ **Se este projeto te ajudou, considere dar uma estrela no GitHub!** 
