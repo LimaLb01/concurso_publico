@@ -996,45 +996,317 @@ function handleChatEnter(event) {
 function generateAIResponse(userMessage) {
     const lowerMessage = userMessage.toLowerCase();
     
-    // Respostas baseadas na Lei Orgânica de Canoas
+    // Detectar solicitações genéricas para "explicar mais"
+    if (lowerMessage.includes('explique mais') || lowerMessage.includes('mais detalhes') || 
+        lowerMessage.includes('mais informações') || lowerMessage.includes('detalhe mais') ||
+        lowerMessage.includes('fale mais') || lowerMessage.includes('conte mais')) {
+        
+        // Verificar se há contexto da última pergunta
+        const chatMessages = document.getElementById('chatMessages');
+        const messages = chatMessages.querySelectorAll('.message');
+        
+        if (messages.length >= 2) {
+            // Procurar pela última pergunta do usuário
+            for (let i = messages.length - 1; i >= 0; i--) {
+                const message = messages[i];
+                if (message.classList.contains('user-message')) {
+                    const userText = message.textContent.toLowerCase();
+                    
+                    // Fornecer explicação detalhada baseada no contexto
+                    if (userText.includes('título de cidadão') || userText.includes('cidadão canoense')) {
+                        return `📋 **Título de Cidadão Canoense - Explicação Detalhada:**
+
+**O que é:** O Título de Cidadão Canoense é uma honraria concedida pelo Município de Canoas a pessoas que tenham prestado relevantes serviços à cidade.
+
+**Como é concedido:** 
+• Através de Decreto Legislativo aprovado pela Câmara Municipal
+• Requer o voto de, no mínimo, 2/3 dos membros da Câmara (Art. 18, XIX)
+• É uma forma de reconhecimento público
+
+**Critérios para concessão:**
+• Serviços relevantes prestados ao município
+• Contribuições significativas para o desenvolvimento da cidade
+• Méritos especiais reconhecidos pela comunidade
+
+**Processo:**
+1. Proposta apresentada na Câmara Municipal
+2. Análise e discussão pelos vereadores
+3. Votação com quórum qualificado (2/3)
+4. Aprovação por Decreto Legislativo
+5. Cerimônia de entrega do título
+
+**Importância:** É uma das formas de reconhecimento público mais importantes do município, demonstrando o agradecimento da cidade pelos serviços prestados.`;
+                    }
+                    
+                    if (userText.includes('vereador') || userText.includes('câmara')) {
+                        return `🏛️ **Câmara Municipal e Vereadores - Explicação Detalhada:**
+
+**Composição:** 21 Vereadores eleitos para mandato de 4 anos
+
+**Principais Atribuições:**
+• Legislar sobre assuntos de interesse local
+• Fiscalizar a administração municipal
+• Aprovar o orçamento anual
+• Criar, alterar ou extinguir tributos
+• Autorizar despesas extraordinárias
+
+**Inviolabilidade:** Os vereadores têm proteção por suas opiniões, palavras e votos no exercício do mandato
+
+**Perda do Mandato pode ocorrer por:**
+• Infringir disposições da Lei Orgânica
+• Utilizar o mandato para corrupção
+• Faltar sem justificativa
+• Condenação criminal transitada em julgado
+
+**Sessões:** A Câmara funciona em sessões ordinárias e extraordinárias, conforme regimento interno.`;
+                    }
+                    
+                    if (userText.includes('prefeito') || userText.includes('executivo')) {
+                        return `👨‍💼 **Poder Executivo Municipal - Explicação Detalhada:**
+
+**Chefe do Executivo:** Prefeito Municipal
+**Auxiliares:** Secretários Municipais
+
+**Mandato:** 4 anos, com possibilidade de uma reeleição
+
+**Posse:** 1º de janeiro do ano subsequente à eleição, com juramento perante a Câmara
+
+**Principais Competências:**
+• Executar as leis municipais
+• Administrar os serviços públicos
+• Elaborar e executar o orçamento
+• Nomear e exonerar secretários
+• Representar o município
+
+**Veto:** Tem 15 dias úteis para sancionar ou vetar projetos de lei
+
+**Responsabilidades:**
+• Prestar contas anualmente
+• Manter a ordem pública
+• Promover o desenvolvimento municipal
+• Coordenar a administração direta e indireta`;
+                    }
+                }
+            }
+        }
+        
+        // Se não encontrou contexto específico, fornecer explicação geral
+        return `📚 **Lei Orgânica de Canoas - Explicação Geral:**
+
+A Lei Orgânica é a "Constituição" do município, estabelecendo sua organização política e administrativa. Aqui estão os principais tópicos que posso explicar detalhadamente:
+
+**🏛️ Poder Legislativo (Câmara Municipal):**
+• Composição e atribuições dos vereadores
+• Processo legislativo
+• Fiscalização da administração
+
+**👨‍💼 Poder Executivo:**
+• Atribuições do prefeito
+• Secretarias municipais
+• Administração direta e indireta
+
+**💰 Finanças e Orçamento:**
+• Receitas e despesas municipais
+• Aplicação mínima em educação (25%)
+• Prestação de contas
+
+**👥 Serviços Públicos:**
+• Saúde, educação, transporte
+• Meio ambiente e urbanismo
+• Segurança pública
+
+**📋 Processos Administrativos:**
+• Licitações e contratos
+• Servidores públicos
+• Conselhos municipais
+
+**Qual desses temas você gostaria que eu detalhe mais?**`;
+    }
+    
+    // Respostas específicas para termos técnicos
     if (lowerMessage.includes('vereador') || lowerMessage.includes('câmara')) {
-        return `Segundo a Lei Orgânica de Canoas, a Câmara Municipal é composta de 21 Vereadores eleitos para mandato de 4 anos. Os Vereadores têm inviolabilidade por suas opiniões, palavras e votos no exercício do mandato. Eles podem perder o mandato por infringir disposições da Lei Orgânica, utilizar o mandato para corrupção, ou faltar sem justificativa.`;
+        return `🏛️ **Câmara Municipal de Canoas:**
+
+**Composição:** 21 Vereadores eleitos para mandato de 4 anos
+
+**Principais Atribuições:**
+• Legislar sobre assuntos de interesse local
+• Fiscalizar a administração municipal
+• Aprovar o orçamento anual
+• Criar, alterar ou extinguir tributos
+
+**Inviolabilidade:** Os vereadores têm proteção por suas opiniões, palavras e votos no exercício do mandato.
+
+**Perda do Mandato:** Pode ocorrer por infringir disposições da Lei Orgânica, utilizar o mandato para corrupção, ou faltar sem justificativa.`;
     }
     
     if (lowerMessage.includes('prefeito') || lowerMessage.includes('executivo')) {
-        return `O Poder Executivo é exercido pelo Prefeito, auxiliado pelos secretários do Município. O Prefeito e Vice-Prefeito são eleitos para mandato de 4 anos e tomam posse no dia 1º de janeiro do ano subsequente à eleição. O Prefeito tem 15 dias úteis para sancionar ou vetar projetos de lei.`;
+        return `👨‍💼 **Poder Executivo Municipal:**
+
+**Chefe:** Prefeito Municipal, auxiliado pelos secretários
+
+**Mandato:** 4 anos, com possibilidade de uma reeleição
+
+**Posse:** 1º de janeiro do ano subsequente à eleição
+
+**Principais Competências:**
+• Executar as leis municipais
+• Administrar os serviços públicos
+• Elaborar e executar o orçamento
+• Nomear e exonerar secretários
+
+**Veto:** Tem 15 dias úteis para sancionar ou vetar projetos de lei.`;
     }
     
     if (lowerMessage.includes('competência') || lowerMessage.includes('atribuição')) {
-        return `As competências municipais incluem: organizar-se administrativamente, legislar sobre assuntos de interesse local, administrar bens municipais, conceder serviços públicos, elaborar o Plano Diretor, estabelecer normas de edificação, organizar transporte coletivo, e muito mais.`;
+        return `📋 **Competências Municipais:**
+
+**Principais Atribuições:**
+• Organizar-se administrativamente
+• Legislar sobre assuntos de interesse local
+• Administrar bens municipais
+• Conceder serviços públicos
+• Elaborar o Plano Diretor
+• Estabelecer normas de edificação
+• Organizar transporte coletivo
+• Proteger o meio ambiente
+
+**Limitações:** As competências devem respeitar a Constituição Federal e as leis estaduais.`;
     }
     
     if (lowerMessage.includes('orçamento') || lowerMessage.includes('finanças')) {
-        return `O Município deve aplicar no mínimo 25% da receita resultante de impostos na educação. A abertura de créditos suplementares não pode exceder 10% da receita orçada. O Prefeito deve prestar contas anualmente até 31 de março.`;
+        return `💰 **Finanças Municipais:**
+
+**Aplicação Mínima em Educação:** 25% da receita resultante de impostos
+
+**Créditos Suplementares:** Não podem exceder 10% da receita orçada
+
+**Prestação de Contas:** O Prefeito deve prestar contas anualmente até 31 de março
+
+**Principais Receitas:**
+• Impostos municipais (IPTU, ISSQN)
+• Transferências da União e Estado
+• Taxas e contribuições
+
+**Controle:** A Câmara Municipal fiscaliza a execução orçamentária.`;
     }
     
     if (lowerMessage.includes('servidor') || lowerMessage.includes('funcionário')) {
-        return `Os servidores públicos municipais têm estabilidade após 3 anos de efetivo exercício. A remuneração não pode exceder o subsídio do Prefeito. É garantido o direito à livre associação sindical e o direito de greve nos termos da lei.`;
+        return `👥 **Servidores Públicos Municipais:**
+
+**Estabilidade:** Após 3 anos de efetivo exercício
+
+**Remuneração:** Não pode exceder o subsídio do Prefeito
+
+**Direitos Garantidos:**
+• Livre associação sindical
+• Direito de greve nos termos da lei
+• Progressão funcional
+• Capacitação profissional
+
+**Deveres:**
+• Dedicação exclusiva ao serviço público
+• Observância das normas de ética
+• Zelar pelo patrimônio público`;
     }
     
     if (lowerMessage.includes('conselho') || lowerMessage.includes('participação')) {
-        return `Os Conselhos Municipais são compostos de 1/3 de representantes da administração municipal e 2/3 da sociedade civil organizada. Eles auxiliam na orientação, planejamento e julgamento de matérias de sua competência.`;
+        return `🤝 **Conselhos Municipais:**
+
+**Composição:** 1/3 de representantes da administração municipal e 2/3 da sociedade civil organizada
+
+**Funções:**
+• Auxiliar na orientação e planejamento
+• Julgar matérias de sua competência
+• Fiscalizar a execução de políticas públicas
+• Promover a participação popular
+
+**Principais Conselhos:**
+• Conselho Municipal de Saúde
+• Conselho Municipal de Educação
+• Conselho Municipal de Meio Ambiente
+• Conselho Municipal de Assistência Social`;
     }
     
     if (lowerMessage.includes('meio ambiente') || lowerMessage.includes('ambiental')) {
-        return `O Município deve proteger o meio ambiente, combater a poluição, preservar florestas, fauna e flora. É vedada a concessão de recursos públicos a atividades que desrespeitem normas de proteção ambiental.`;
+        return `🌱 **Meio Ambiente Municipal:**
+
+**Obrigações do Município:**
+• Proteger o meio ambiente
+• Combater a poluição
+• Preservar florestas, fauna e flora
+• Promover o desenvolvimento sustentável
+
+**Vedação:** É vedada a concessão de recursos públicos a atividades que desrespeitem normas de proteção ambiental
+
+**Instrumentos:**
+• Plano Diretor
+• Zoneamento ambiental
+• Licenciamento ambiental
+• Educação ambiental`;
     }
     
     if (lowerMessage.includes('educação') || lowerMessage.includes('ensino')) {
-        return `A educação é direito de todos e dever do Estado. O Município deve aplicar no mínimo 25% da receita de impostos na manutenção e desenvolvimento do ensino. O sistema municipal abrange ensino pré-escolar e fundamental.`;
+        return `📚 **Educação Municipal:**
+
+**Direito Universal:** A educação é direito de todos e dever do Estado
+
+**Aplicação Mínima:** 25% da receita de impostos na manutenção e desenvolvimento do ensino
+
+**Sistema Municipal:**
+• Ensino pré-escolar
+• Ensino fundamental
+• Educação de jovens e adultos
+• Educação especial
+
+**Responsabilidades:**
+• Garantir acesso universal
+• Manter qualidade do ensino
+• Capacitar professores
+• Modernizar infraestrutura`;
     }
     
     if (lowerMessage.includes('saúde') || lowerMessage.includes('sistema único')) {
-        return `O Sistema Único de Saúde Municipal garante acesso universal e igualitário às ações de saúde. As ações são de relevância pública e devem ser executadas preferencialmente através de serviços oficiais.`;
+        return `🏥 **Sistema Único de Saúde Municipal:**
+
+**Princípios:**
+• Acesso universal e igualitário
+• Relevância pública das ações
+• Execução preferencial através de serviços oficiais
+
+**Atribuições:**
+• Atenção básica à saúde
+• Vigilância sanitária
+• Vigilância epidemiológica
+• Assistência farmacêutica
+
+**Participação:** Controle social através dos Conselhos de Saúde
+
+**Financiamento:** Recursos próprios e transferências da União e Estado`;
     }
     
-    // Resposta padrão
-    return `Sobre a Lei Orgânica de Canoas, posso ajudar com informações sobre: Vereadores e Câmara Municipal, Prefeito e Poder Executivo, competências municipais, orçamento e finanças, servidores públicos, conselhos municipais, meio ambiente, educação, saúde, e muito mais. Qual aspecto específico você gostaria de saber?`;
+    // Resposta padrão melhorada
+    return `🤖 **Assistente IA - Lei Orgânica de Canoas**
+
+Olá! Sou seu assistente especializado na Lei Orgânica de Canoas. Posso ajudar com:
+
+**📋 Tópicos Principais:**
+• 🏛️ Vereadores e Câmara Municipal
+• 👨‍💼 Prefeito e Poder Executivo  
+• 📋 Competências municipais
+• 💰 Orçamento e finanças
+• 👥 Servidores públicos
+• 🤝 Conselhos municipais
+• 🌱 Meio ambiente
+• 📚 Educação
+• 🏥 Saúde
+
+**💡 Como usar:**
+• Digite sua pergunta específica
+• Use "explique mais" para detalhes adicionais
+• Clique nos botões de ações rápidas
+
+**Qual tema você gostaria de saber mais?**`;
 }
 
 // Funções de ações rápidas
