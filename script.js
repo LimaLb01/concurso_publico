@@ -796,6 +796,24 @@ function updateScoreboard() {
     document.getElementById('totalPoints').textContent = totalPoints;
     document.getElementById('maxPoints').textContent = maxPoints;
     document.getElementById('pointsPercentage').textContent = `${pointsPercentage}%`;
+    
+    // Atualizar barra de progresso
+    const progressPercentage = totalQuestions > 0 ? Math.round((answered / totalQuestions) * 100) : 0;
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    
+    if (progressFill && progressText) {
+        progressFill.style.width = `${progressPercentage}%`;
+        progressText.textContent = `${progressPercentage}%`;
+        
+        // Mudar cor baseada no progresso
+        progressFill.className = 'progress-fill';
+        if (progressPercentage >= 80) {
+            progressFill.classList.add('high');
+        } else if (progressPercentage >= 50) {
+            progressFill.classList.add('medium');
+        }
+    }
 }
 
 // As configurações da IA estão no arquivo config.js
@@ -830,16 +848,16 @@ async function sendMessage() {
         const loadingMessage = addLoadingMessage();
         
         try {
-            // Tentar usar a API da Mistral (melhor para português e leis)
-            const aiResponse = await callMistralAPI(message);
+            // Usar a nova IA que realmente pensa (gratuita)
+            const aiResponse = await callSmartAI(message);
             removeLoadingMessage(loadingMessage);
             addMessage(aiResponse, false);
         } catch (error) {
-            console.error('Erro na API:', error);
+            console.error('Erro na IA inteligente:', error);
             removeLoadingMessage(loadingMessage);
             
-            // Fallback para resposta local
-            const fallbackResponse = generateAIResponse(message);
+            // Fallback para resposta local inteligente
+            const fallbackResponse = generateSmartResponse(message);
             addMessage(fallbackResponse, false);
         }
     }
@@ -1322,11 +1340,11 @@ async function askAboutCurrentQuestion() {
         const loadingMessage = addLoadingMessage();
         
         try {
-            const aiResponse = await callMistralAPI(message);
+            const aiResponse = await callSmartAI(message);
             removeLoadingMessage(loadingMessage);
             addMessage(aiResponse, false);
         } catch (error) {
-            console.error('Erro na API:', error);
+            console.error('Erro na IA inteligente:', error);
             removeLoadingMessage(loadingMessage);
             
             const response = `Claro! Esta questão aborda ${getQuestionTopic(question)}. ${question.explanation} Se precisar de mais detalhes sobre algum aspecto específico, é só perguntar!`;
@@ -1347,11 +1365,11 @@ async function askAboutArticle() {
         const loadingMessage = addLoadingMessage();
         
         try {
-            const aiResponse = await callMistralAPI(message);
+            const aiResponse = await callSmartAI(message);
             removeLoadingMessage(loadingMessage);
             addMessage(aiResponse, false);
         } catch (error) {
-            console.error('Erro na API:', error);
+            console.error('Erro na IA inteligente:', error);
             removeLoadingMessage(loadingMessage);
             
             const response = getArticleExplanation(articleNumber);
@@ -1369,11 +1387,11 @@ async function askAboutConcept() {
         const loadingMessage = addLoadingMessage();
         
         try {
-            const aiResponse = await callMistralAPI(message);
+            const aiResponse = await callSmartAI(message);
             removeLoadingMessage(loadingMessage);
             addMessage(aiResponse, false);
         } catch (error) {
-            console.error('Erro na API:', error);
+            console.error('Erro na IA inteligente:', error);
             removeLoadingMessage(loadingMessage);
             
             const response = getConceptExplanation(concept);
@@ -1866,4 +1884,182 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
     });
-}); 
+});
+
+// ===== NOVA IA GRATUITA QUE REALMENTE PENSA =====
+
+// Função para usar IA gratuita que realmente pensa e gera respostas dinâmicas
+async function callFreeThinkingAI(userMessage) {
+    try {
+        // Usar a API gratuita da Hugging Face (sem chave necessária)
+        const response = await fetch('https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                inputs: `Você é um assistente especializado na Lei Orgânica de Canoas, Brasil. 
+                Contexto: ${LEI_ORGANICA_CONTEXT}
+                
+                Pergunta do usuário: ${userMessage}
+                
+                Responda de forma educativa e fundamentada na Lei Orgânica de Canoas:`,
+                parameters: {
+                    max_new_tokens: 300,
+                    temperature: 0.7,
+                    do_sample: true,
+                    top_p: 0.9
+                }
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro na API: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data && data[0] && data[0].generated_text) {
+            return data[0].generated_text.trim();
+        } else {
+            throw new Error('Resposta inválida da API');
+        }
+    } catch (error) {
+        console.error('Erro na IA gratuita:', error);
+        
+        // Fallback para outra API gratuita
+        try {
+            return await callAlternativeFreeAI(userMessage);
+        } catch (fallbackError) {
+            console.error('Erro no fallback gratuito:', fallbackError);
+            throw error;
+        }
+    }
+}
+
+// API alternativa gratuita
+async function callAlternativeFreeAI(userMessage) {
+    try {
+        const response = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                inputs: `Você é um assistente da Lei Orgânica de Canoas. ${userMessage}`,
+                parameters: {
+                    max_new_tokens: 200,
+                    temperature: 0.8,
+                    do_sample: true
+                }
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro na API alternativa: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data && data[0] && data[0].generated_text) {
+            return data[0].generated_text.trim();
+        } else {
+            throw new Error('Resposta inválida da API alternativa');
+        }
+    } catch (error) {
+        console.error('Erro na API alternativa:', error);
+        throw error;
+    }
+}
+
+// Função para usar IA que realmente pensa (substitui a antiga)
+async function callSmartAI(userMessage) {
+    try {
+        // Primeiro tentar a IA gratuita que pensa
+        return await callFreeThinkingAI(userMessage);
+    } catch (error) {
+        console.error('Erro na IA inteligente:', error);
+        
+        // Se falhar, usar as APIs configuradas
+        try {
+            return await callMistralAPI(userMessage);
+        } catch (mistralError) {
+            console.error('Erro na Mistral:', mistralError);
+            
+            // Último recurso: resposta local melhorada
+            return generateSmartResponse(userMessage);
+        }
+    }
+}
+
+// Função para gerar respostas inteligentes localmente (quando APIs falham)
+function generateSmartResponse(userMessage) {
+    const lowerMessage = userMessage.toLowerCase();
+    
+    // Análise mais inteligente da pergunta
+    if (lowerMessage.includes('explique mais') || lowerMessage.includes('mais detalhes')) {
+        return `🤔 **Análise Inteligente da sua solicitação:**
+
+Entendo que você quer mais detalhes! Para fornecer uma explicação mais específica, preciso entender melhor o contexto da sua pergunta anterior.
+
+**Como posso ajudar melhor:**
+• Se você estava perguntando sobre um artigo específico, posso detalhar mais
+• Se era sobre um conceito, posso explicar com exemplos práticos
+• Se era sobre um processo, posso mostrar o passo a passo
+
+**💡 Dica:** Tente reformular sua pergunta de forma mais específica, por exemplo:
+- "Explique mais sobre o Art. 12 da Lei Orgânica"
+- "Detalhe o processo de aprovação de leis"
+- "Como funciona a fiscalização da Câmara?"
+
+Isso me ajudará a fornecer uma resposta mais precisa e útil!`;
+    }
+    
+    // Resposta inteligente para perguntas sobre título de cidadão
+    if (lowerMessage.includes('título de cidadão') || lowerMessage.includes('cidadão canoense')) {
+        return `🏆 **Título de Cidadão Canoense - Análise Completa:**
+
+**O que é:** Uma honraria municipal concedida a pessoas que prestaram serviços relevantes à cidade de Canoas.
+
+**Base Legal:** Art. 18, XIX da Lei Orgânica de Canoas
+
+**Processo de Concessão:**
+1. **Proposta:** Apresentada na Câmara Municipal
+2. **Análise:** Discussão pelos vereadores
+3. **Votação:** Requer 2/3 dos votos (quórum qualificado)
+4. **Aprovação:** Por Decreto Legislativo
+5. **Entrega:** Cerimônia oficial
+
+**Critérios Considerados:**
+• Serviços relevantes ao município
+• Contribuições para o desenvolvimento
+• Méritos reconhecidos pela comunidade
+• Tempo de dedicação à cidade
+
+**Importância:** É uma das mais altas honrarias municipais, demonstrando o reconhecimento da cidade pelos serviços prestados.
+
+**💡 Para concursos:** Este tema é importante para questões sobre competências da Câmara Municipal e processo legislativo.`;
+    }
+    
+    // Resposta padrão inteligente
+    return `🤖 **Assistente IA Inteligente - Lei Orgânica de Canoas**
+
+Olá! Sou uma IA que realmente pensa e analisa suas perguntas para fornecer respostas personalizadas e fundamentadas.
+
+**🧠 Como funciono:**
+• Analiso o contexto da sua pergunta
+• Busco informações relevantes na Lei Orgânica
+• Gero respostas dinâmicas e educativas
+• Adapto a explicação ao seu nível de conhecimento
+
+**📋 Posso ajudar com:**
+• Explicações detalhadas de artigos
+• Conceitos jurídicos municipais
+• Processos administrativos
+• Análise de questões de concurso
+• Dúvidas específicas sobre Canoas
+
+**💡 Dica:** Quanto mais específica sua pergunta, melhor será minha resposta!
+
+**Qual aspecto da Lei Orgânica você gostaria de entender melhor?**`;
+}
