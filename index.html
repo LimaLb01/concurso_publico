@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Lei Orgânica de Canoas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Chat IA - Lado Esquerdo -->
+        <div class="ai-chat-container">
+            <div class="ai-chat-header">
+                <h3>🤖 Assistente IA</h3>
+                <p>Dúvidas sobre a Lei Orgânica</p>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <div class="message-content">
+                        <strong>IA:</strong> Olá! Sou seu assistente para dúvidas sobre a Lei Orgânica de Canoas. Posso ajudar com explicações detalhadas sobre qualquer artigo ou conceito. Como posso ajudar?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Digite sua dúvida..." onkeypress="handleChatEnter(event)">
+                <button onclick="sendMessage()" class="send-btn">📤</button>
+            </div>
+            
+            <div class="quick-actions">
+                <h4>📋 Ações Rápidas:</h4>
+                <button onclick="askAboutCurrentQuestion()" class="quick-btn">❓ Dúvida sobre questão atual</button>
+                <button onclick="askAboutArticle()" class="quick-btn">📖 Explicar artigo específico</button>
+                <button onclick="askAboutConcept()" class="quick-btn">💡 Conceito geral</button>
+            </div>
+        </div>
+
+        <!-- Quiz Principal - Lado Direito -->
+        <div class="quiz-main-container">
+            <header>
+                <h1>🏛️ Quiz Lei Orgânica de Canoas</h1>
+                <p>🎯 <strong>Preparação para Concurso Público</strong> - Teste seus conhecimentos sobre a Lei Orgânica Municipal</p>
+                <div class="concurso-info">
+                    <span class="concurso-badge">🎯 Foco: Concurso Público</span>
+                    <span class="concurso-badge">📚 15 Questões de Legislação Municipal</span>
+                    <span class="concurso-badge">⏰ Simulação de Prova Real</span>
+                </div>
+            </header>
+
+            <!-- Seleção de Usuário -->
+            <div id="userSelection" class="user-selection">
+                <h2>Selecione seu usuário:</h2>
+                <div class="user-buttons">
+                    <button class="user-btn" onclick="selectUser('Lucas')">👨‍💼 Lucas</button>
+                    <button class="user-btn" onclick="selectUser('Tony')">👨‍💻 Tony</button>
+                </div>
+            </div>
+
+            <!-- Área do Quiz -->
+            <div id="quizArea" class="quiz-area" style="display: none;">
+            <div class="user-info">
+                <h3>Usuário: <span id="currentUser"></span></h3>
+                
+                <!-- Timer Display -->
+                <div class="timer-container" id="timerContainer" style="display: none;">
+                    <span class="timer-label">⏰ Tempo:</span>
+                    <span class="timer-display" id="timerDisplay">00:00:00</span>
+                </div>
+                
+                <div class="scoreboard">
+                    <div class="score-item">
+                        <span class="score-label">Total de Perguntas:</span>
+                        <span id="totalQuestions">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Respondidas:</span>
+                        <span id="answeredQuestions">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Acertadas:</span>
+                        <span id="correctAnswers">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Erradas:</span>
+                        <span id="wrongAnswers">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Taxa de Acerto:</span>
+                        <span id="accuracyRate">0%</span>
+                    </div>
+                    <div class="score-item points-item">
+                        <span class="score-label">🎯 Pontos:</span>
+                        <span id="totalPoints">0</span>
+                        <span class="points-separator">/</span>
+                        <span id="maxPoints">30</span>
+                        <span class="points-percentage">(<span id="pointsPercentage">0%</span>)</span>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="reviewBtn" onclick="toggleReviewMode()" class="action-btn">🔍 Modo Revisão</button>
+                    <button id="timerBtn" onclick="toggleTimer()" class="action-btn">⏰ Timer: OFF</button>
+                    <button onclick="showDetailedStats()" class="action-btn">📊 Estatísticas</button>
+                    <button onclick="exportResults()" class="action-btn">📤 Exportar</button>
+                    <button onclick="resetProgress()" class="action-btn reset-btn">🔄 Reset Total</button>
+                </div>
+                
+                <!-- Dicas para Concurso -->
+                <div class="concurso-tips">
+                    <h4>🎯 Dicas para Concurso:</h4>
+                    <div class="tips-grid">
+                        <div class="tip-item">
+                            <span class="tip-icon">⏰</span>
+                            <span class="tip-text">Use o timer para simular prova real</span>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">📊</span>
+                            <span class="tip-text">Analise estatísticas para identificar pontos fracos</span>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">🔍</span>
+                            <span class="tip-text">Use modo revisão para questões erradas</span>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">🎯</span>
+                            <span class="tip-text">Busque 30 pontos para estar preparado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="difficulty-badge" id="difficultyBadge"></div>
+                <div class="question-points">🎯 2 pontos</div>
+                <h2 id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer">
+                    <!-- Opções serão inseridas aqui -->
+                </div>
+
+                <div class="answer-feedback" id="answerFeedback" style="display: none;">
+                    <div id="feedbackMessage"></div>
+                    <div id="explanation"></div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button id="prevBtn" onclick="previousQuestion()" disabled>← Anterior</button>
+                    <button id="nextBtn" onclick="nextQuestion()">Próxima →</button>
+                </div>
+            </div>
+
+            <button class="change-user-btn" onclick="changeUser()">Trocar Usuário</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
