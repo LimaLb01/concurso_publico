@@ -796,6 +796,24 @@ function updateScoreboard() {
     document.getElementById('totalPoints').textContent = totalPoints;
     document.getElementById('maxPoints').textContent = maxPoints;
     document.getElementById('pointsPercentage').textContent = `${pointsPercentage}%`;
+    
+    // Atualizar barra de progresso
+    const progressPercentage = totalQuestions > 0 ? Math.round((answered / totalQuestions) * 100) : 0;
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    
+    if (progressFill && progressText) {
+        progressFill.style.width = `${progressPercentage}%`;
+        progressText.textContent = `${progressPercentage}%`;
+        
+        // Mudar cor baseada no progresso
+        progressFill.className = 'progress-fill';
+        if (progressPercentage >= 80) {
+            progressFill.classList.add('high');
+        } else if (progressPercentage >= 50) {
+            progressFill.classList.add('medium');
+        }
+    }
 }
 
 // As configurações da IA estão no arquivo config.js
